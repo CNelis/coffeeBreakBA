@@ -27,7 +27,8 @@ def show_match_page():
 
     listLength = int(len(nameList) / 2)
 
-    matches = random.sample(set(itertools.combinations(nameList, listLength)), 1)
+    matches = random.sample(set(itertools.product(a, b)), listLength)
 
+    match = itertools.combinations(nameList, listLength)
 
-    st.table(matches)
+    st.table(match)
