@@ -25,7 +25,7 @@ def show_match_page():
 
     a, b = split_list(nameList)
 
-    listLength = len(nameList)
+    listLength = int(len(nameList)/2)
 
     matches = random.sample(set(itertools.product(a, b)), listLength)
 
