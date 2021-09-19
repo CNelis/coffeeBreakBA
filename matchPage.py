@@ -32,6 +32,9 @@ def show_match_page():
     all_combinations = itertools.product(nameList)
     filtered_combinations = filter(lambda x: len(x) != len(set(x)), all_combinations)
 
-    st.write(all_combinations)
-    st.write(filtered_combinations)
+    for n in all_combinations:
+        st.write(n)
+
+    for n in filtered_combinations:
+        st.write(n)
     # st.table(filtered_combinations)
