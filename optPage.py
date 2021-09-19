@@ -24,5 +24,6 @@ def optOptions():
     # nameList = nameList.sort()
     inOut = ['Im In!', 'Im Out!']
 
-    for name in nameList:
-        st.radio('Select one ' + name, inOut)
+    option = st.selectbox('Select your name', nameList)
+
+    st.radio('Select one ' + option, inOut)
