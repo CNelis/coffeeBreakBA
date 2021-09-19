@@ -19,14 +19,17 @@ def show_match_page():
                 'Dylan Wright', 'David Anderson', 'Tara McGonigle', 'Grant Stalker', 'Athos Georgiou'
                 ]
 
-    def split_list(a_list):
-        half = len(a_list) // 2
-        return a_list[:half], a_list[half:]
+    # def split_list(a_list):
+    #     half = len(a_list) // 2
+    #     return a_list[:half], a_list[half:]
+    #
+    # a, b = split_list(nameList)
+    #
+    # listLength = int(len(nameList) / 2)
+    #
+    # matches = random.sample(set(itertools.product(a, b)), listLength)
 
-    a, b = split_list(nameList)
+    all_combinations = itertools.product(nameList)
+    filtered_combinations = filter(lambda x: len(x) != len(set(x)), all_combinations)
 
-    listLength = int(len(nameList) / 2)
-
-    matches = random.sample(set(itertools.product(a, b)), listLength)
-
-    st.table(matches)
+    st.table(filtered_combinations)
