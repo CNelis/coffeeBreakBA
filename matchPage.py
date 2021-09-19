@@ -29,6 +29,8 @@ def show_match_page():
 
     matches = random.sample(set(itertools.product(a, b)), listLength)
 
-    match = itertools.combinations(nameList, listLength)
+    match = random.sample(set(itertools.combinations(nameList, listLength)), 1)
 
-    st.table(match)
+    st.write(match)
+    # for x in match:
+    #     st.write(x)
