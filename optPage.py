@@ -36,11 +36,11 @@ def optOptions():
             optArray[namePosition] = 1.0
         else:
             optArray[namePosition] = 0.0
-        numpy.save('numArr/OptArray', optArray)
+        numpy.save('numArr/OptArray.npy', optArray)
     else:
         select = st.radio('Select one ' + option, inOut, 1)
         if select == 'Im In!':
             optArray[namePosition] = 1.0
         else:
             optArray[namePosition] = 0.0
-        numpy.save('numArr/OptArray', optArray)
+        numpy.save('numArr/OptArray.npy', optArray)
