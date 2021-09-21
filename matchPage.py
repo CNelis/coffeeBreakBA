@@ -34,8 +34,8 @@ def show_match_page():
     optArray = sh.sheet1.col_values(2)
     optedIn = []
 
-    for choice in range(0, len(optArray) - 2):
-        if optArray[choice] == 1.0:
+    for choice in range(0, len(optArray)):
+        if optArray[choice] == '1':
             optedIn.append(nameList[choice])
 
     def split_list(a_list):
