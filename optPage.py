@@ -40,7 +40,7 @@ def optOptions():
     else:
         select = st.radio('Select one ' + option, inOut, 1)
         if select == 'Im In!':
-            sh.sheet1.update_cell(namePosition + 1, 2, '0')
+            sh.sheet1.update_cell(namePosition + 1, 2, '1')
         else:
             sh.sheet1.update_cell(namePosition + 1, 2, '0')
 
