@@ -1,10 +1,11 @@
+import numpy
 import streamlit as st
 from PIL import Image
 
 
 def show_opt_page():
-    # image = Image.open('banner/R.png')
-    # st.image(image, use_column_width=True)
+    image = Image.open('banner/CGI_LinkedIn_banner_modern_office.jpg')
+    st.image(image, use_column_width=True)
 
     st.header('Opt in / out of coffee chats')
 
@@ -21,9 +22,25 @@ def optOptions():
                 'David Anderson', 'Tara McGonigle', 'Grant Stalker', 'Athos Georgiou'
                 ]
 
-    # nameList = nameList.sort()
+    optArray = numpy.load('numArr/OptArray.npy')
+
     inOut = ['Im In!', 'Im Out!']
 
     option = st.selectbox('Select your name', nameList)
 
-    st.radio('Select one ' + option, inOut)
+    namePosition = nameList.index(option)
+
+    if optArray[namePosition] == 1.0:
+        select = st.radio('Select one ' + option, inOut, 0)
+        if select == 'Im In!':
+            optArray[namePosition] = 1.0
+        else:
+            optArray[namePosition] = 0.0
+        numpy.save('numArr/OptArray', optArray)
+    else:
+        select = st.radio('Select one ' + option, inOut, 1)
+        if select == 'Im In!':
+            optArray[namePosition] = 1.0
+        else:
+            optArray[namePosition] = 0.0
+        numpy.save('numArr/OptArray', optArray)
