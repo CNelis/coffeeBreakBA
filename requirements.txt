@@ -3,3 +3,4 @@ streamlit~=0.88.0
 numpy~=1.19.5
 plotly~=5.3.1
 gsheetsdb~=0.1.13
+gspread~=4.0.1
