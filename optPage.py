@@ -22,7 +22,7 @@ def optOptions():
                 'David Anderson', 'Tara McGonigle', 'Grant Stalker', 'Athos Georgiou'
                 ]
 
-    optArray = numpy.load('numArr/OptArray.npy')
+    optArray = numpy.load('OptArray.npy')
 
     inOut = ['Im In!', 'Im Out!']
 
@@ -36,11 +36,11 @@ def optOptions():
             optArray[namePosition] = 1.0
         else:
             optArray[namePosition] = 0.0
-        numpy.save('numArr/OptArray.npy', optArray)
+        numpy.save('OptArray.npy', optArray)
     else:
         select = st.radio('Select one ' + option, inOut, 1)
         if select == 'Im In!':
             optArray[namePosition] = 1.0
         else:
             optArray[namePosition] = 0.0
-        numpy.save('numArr/OptArray.npy', optArray)
+        numpy.save('OptArray.npy', optArray)

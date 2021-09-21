@@ -31,7 +31,7 @@ def show_match_page():
                 'Dylan Wright', 'David Anderson', 'Tara McGonigle', 'Grant Stalker', 'Athos Georgiou'
                 ]
 
-    optArray = numpy.load('numArr/OptArray.npy')
+    optArray = numpy.load('OptArray.npy')
     optedIn = []
 
     for choice in range(0, len(optArray) - 2):
