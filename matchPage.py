@@ -14,7 +14,6 @@ def show_match_page():
 
     primaryColor = "#e31937"
     secondaryBackgroundColor = "#e1e1e1"
-    textColor = "#000000"
 
     def startAndEnd(day):
         dt = datetime.strptime(day, '%Y-%m-%d')
