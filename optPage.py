@@ -1,28 +1,29 @@
 import numpy
 import streamlit as st
 from PIL import Image
-
+from google.oauth2 import service_account
+from gsheetsdb import connect
+import gspread
 
 def show_opt_page():
     image = Image.open('banner/CGI_LinkedIn_banner_modern_office.jpg')
     st.image(image, use_column_width=True)
 
-    st.header('Opt in / out of coffee chats')
+    st.header('Opt In/Out of Coffee Chats')
 
     optOptions()
 
 
 def optOptions():
-    nameList = ['Isobel Stewart', 'Alex Stone', 'Anitha Ramalingam', 'Chloe Gallacher', 'Chris Bellingham',
-                'Chris Magowan', 'Chris Nelis', 'Dave Edwards', 'Dave Miller', 'Elaine Porteous', 'Elisha Cooper',
-                'Emma Gillespie', 'Euan Cameron', 'Gillian McPhillips', 'Guy Chisholm', 'Jack Penman', 'Kirsty Purden',
-                'Linda Horsburgh', 'Ross McArthur', 'Ryan Sharkey', 'Senthamil Vijayakumar Pandiyan', 'Shaun Cooper',
-                'Suresh Natesan', 'David Ballantyne', 'Campbell Roberts', 'Kirsty ramsay', 'Jean Hezghia',
-                'Dylan Wright',
-                'David Anderson', 'Tara McGonigle', 'Grant Stalker', 'Athos Georgiou'
-                ]
 
-    optArray = numpy.load('OptArray.npy')
+    gc = gspread.service_account_from_dict(st.secrets["gcp_service_account"])
+
+    sh = gc.open_by_url(st.secrets["private_gsheets_url"])
+
+    nameList = sh.sheet1.col_values(1)
+
+
+    optArray = sh.sheet1.col_values(2)
 
     inOut = ['Im In!', 'Im Out!']
 
@@ -31,16 +32,15 @@ def optOptions():
     namePosition = nameList.index(option)
 
     if optArray[namePosition] == 1.0:
-        select = st.radio('Select one ' + option, inOut, 0)
+        select = st.radio('Are you free for a chat?', inOut, 0)
         if select == 'Im In!':
-            optArray[namePosition] = 1.0
+            sh.sheet1.update_cell(namePosition+1, 2, 1.0)
         else:
-            optArray[namePosition] = 0.0
-        numpy.save('OptArray.npy', optArray)
+            sh.sheet1.update_cell(namePosition+1, 2, 0.0)
     else:
         select = st.radio('Select one ' + option, inOut, 1)
         if select == 'Im In!':
-            optArray[namePosition] = 1.0
+            sh.sheet1.update_cell(namePosition + 1, 2, 1.0)
         else:
-            optArray[namePosition] = 0.0
-        numpy.save('OptArray.npy', optArray)
+            sh.sheet1.update_cell(namePosition + 1, 2, 0.0)
+
