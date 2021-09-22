@@ -11,17 +11,24 @@ from random import randint
 
 
 def show_match_page():
-    image = Image.open('banner/CGI_LinkedIn_banner_modern_office.jpg')
-    st.image(image, use_column_width=True)
+
+    def oddEven(listA, listB):
+        if len(listA) > len(listB):
+            double = listA[-1] + ' + ' + (listA[0])
+            listA[-1] = double
+            del listA[0]
+        if len(listB) > len(listA):
+            double = listB[-1] + ' + ' + (listB[0])
+            listB[-1] = double
+            del listB[0]
+
+        return listA, listB
 
     primaryColor = "#e31937"
     secondaryBackgroundColor = "#e1e1e1"
 
-    def startAndEnd(day):
-        dt = datetime.strptime(day, '%Y-%m-%d')
-        start = dt - timedelta(days=dt.weekday())
-        end = start + timedelta(days=6)
-        return start, end
+    image = Image.open('banner/CGI_LinkedIn_banner_modern_office.jpg')
+    st.image(image, use_column_width=True)
 
     st.header('This Weeks Coffee Chat Matches Below')
 
@@ -42,18 +49,6 @@ def show_match_page():
         half = len(a_list) // 2
         return a_list[:half], a_list[half:]
 
-    def oddEven(listA, listB):
-        if len(listA) > len(listB):
-            double = listA[-1] + ' + ' + (listA[0])
-            listA[-1] = double
-            del listA[0]
-        if len(listB) > len(listA):
-            double = listB[-1] + ' + ' + (listB[0])
-            listB[-1] = double
-            del listB[0]
-
-        return listA, listB
-
     listLength = int(len(optedIn) / 2)
     organiserAttendeeGroups = []
     a, b = split_list(optedIn)
@@ -68,7 +63,7 @@ def show_match_page():
     week = int(datetime.date(datetime.today()).strftime("%V"))
     modTablePicker = week % listLength
     a, b = oddEven(organiserAttendeeGroups[modTablePicker][0], organiserAttendeeGroups[modTablePicker][1])
-    fig = go.Figure(data=[go.Table(header=dict(values=['Meeting Organiser', 'Attendee'], fill_color=primaryColor),
+    fig = go.Figure(data=[go.Table(header=dict(values=['Meeting Organiser', 'Attendee'], fill_color=primaryColor, font_color=#FFFFF),
                                    cells=dict(values=[a, b], fill_color=secondaryBackgroundColor))
                           ])
     fig.update_layout()
