@@ -63,7 +63,7 @@ def show_match_page():
     week = int(datetime.date(datetime.today()).strftime("%V"))
     modTablePicker = week % listLength
     a, b = oddEven(organiserAttendeeGroups[modTablePicker][0], organiserAttendeeGroups[modTablePicker][1])
-    fig = go.Figure(data=[go.Table(header=dict(values=['Meeting Organiser', 'Attendee'], fill_color=primaryColor, font_color=#FFFFF),
+    fig = go.Figure(data=[go.Table(header=dict(values=['Meeting Organiser', 'Attendee'], fill_color=primaryColor, font_color='#FFFFFF'),
                                    cells=dict(values=[a, b], fill_color=secondaryBackgroundColor))
                           ])
     fig.update_layout()
