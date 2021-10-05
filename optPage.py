@@ -46,5 +46,5 @@ def optOptions():
             else:
                 sh.sheet1.update_cell(namePosition + 1, 2, '0')
     else:
-        st.write("Opt in and opt out avaliable on Mondays")
+        st.warning("Opt in and opt out avaliable on Mondays")
 
