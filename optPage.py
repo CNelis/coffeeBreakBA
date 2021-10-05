@@ -4,6 +4,7 @@ from PIL import Image
 from google.oauth2 import service_account
 from gsheetsdb import connect
 import gspread
+from datetime import datetime
 
 def show_opt_page():
     image = Image.open('banner/CGI_LinkedIn_banner_modern_office.jpg')
