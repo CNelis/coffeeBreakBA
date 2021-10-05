@@ -31,16 +31,19 @@ def optOptions():
 
     namePosition = nameList.index(option)
 
-    if optArray[namePosition] == '1':
-        select = st.radio('Are you free for a chat?', inOut, 0)
-        if select == 'Im In!':
-            sh.sheet1.update_cell(namePosition+1, 2, '1')
+    if datetime.datetime.today().weekday() == 0:
+        if optArray[namePosition] == '1':
+            select = st.radio('Are you free for a chat?', inOut, 0)
+            if select == 'Im In!':
+                sh.sheet1.update_cell(namePosition+1, 2, '1')
+            else:
+                sh.sheet1.update_cell(namePosition+1, 2, '0')
         else:
-            sh.sheet1.update_cell(namePosition+1, 2, '0')
+            select = st.radio('Select one ' + option, inOut, 1)
+            if select == 'Im In!':
+                sh.sheet1.update_cell(namePosition + 1, 2, '1')
+            else:
+                sh.sheet1.update_cell(namePosition + 1, 2, '0')
     else:
-        select = st.radio('Select one ' + option, inOut, 1)
-        if select == 'Im In!':
-            sh.sheet1.update_cell(namePosition + 1, 2, '1')
-        else:
-            sh.sheet1.update_cell(namePosition + 1, 2, '0')
+        st.write("Opt in and opt out avaliable on Mondays")
 
