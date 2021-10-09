@@ -3,6 +3,7 @@ import random
 from datetime import datetime, timedelta
 
 import gspread
+import pandas as pd
 import plotly.graph_objects as go
 import numpy
 import streamlit as st
@@ -10,8 +11,15 @@ from PIL import Image
 from random import randint
 
 
-def show_match_page():
+def getIceBreaker():
+    icebreakers = pd.read_csv('icebreaker.csv', header=None)
+    icebreakers = pd.DataFrame(icebreakers)
+    week = int(datetime.date(datetime.today()).strftime("%V"))
+    breaker = icebreakers[0].values[week]
+    st.info("Icebreaker - " + breaker)
 
+
+def show_match_page():
     def oddEven(listA, listB):
         if len(listA) > len(listB):
             double = listA[-1] + ' + ' + (listA[0])
@@ -31,6 +39,7 @@ def show_match_page():
     st.image(image, use_column_width=True)
 
     st.header('This Weeks Coffee Chat Matches Below')
+    getIceBreaker()
 
     gc = gspread.service_account_from_dict(st.secrets["gcp_service_account"])
 
@@ -63,8 +72,9 @@ def show_match_page():
     week = int(datetime.date(datetime.today()).strftime("%V"))
     modTablePicker = week % listLength
     a, b = oddEven(organiserAttendeeGroups[modTablePicker][0], organiserAttendeeGroups[modTablePicker][1])
-    fig = go.Figure(data=[go.Table(header=dict(values=['Meeting Organiser', 'Attendee'], fill_color=primaryColor, font_color='#FFFFFF'),
-                                   cells=dict(values=[a, b], fill_color=secondaryBackgroundColor))
-                          ])
+    fig = go.Figure(data=[
+        go.Table(header=dict(values=['Meeting Organiser', 'Attendee'], fill_color=primaryColor, font_color='#FFFFFF'),
+                 cells=dict(values=[a, b], fill_color=secondaryBackgroundColor))
+    ])
     fig.update_layout()
     st.plotly_chart(fig)
